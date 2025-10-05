@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { BASE_URL } from '../utils/constant';
 import { useDispatch, useSelector } from 'react-redux';
 import { addConnection } from '../utils/connections';
+import { Link } from 'react-router-dom';
 
 const Connections = () => {
   const distpatch = useDispatch();
@@ -39,17 +40,24 @@ const Connections = () => {
         return (
           <div
             key={_id}
-            className="flex p-4 m-4 mx-auto bg-base-300 w-1/2 rounded-lg"
+            className="flex justify-between p-4 m-4 mx-auto bg-base-300 w-1/2 rounded-lg"
           >
-            <div>
-              <img src={photoUrl} alt="" className="w-20 h-20 rounded-full" />
+            <div className="flex">
+              <div>
+                <img src={photoUrl} alt="" className="w-20 h-20 rounded-full" />
+              </div>
+
+              <div className="text-left mx-4">
+                <h2 className="font-bold">{firstName + ' ' + lastName}</h2>
+                {age && gender && <p>{age + ' ' + gender}</p>}
+                <p>{profile}</p>
+              </div>
             </div>
 
-            <div className="text-left mx-4">
-              <h2 className="font-bold">{firstName + ' ' + lastName}</h2>
-
-              {age && gender && <p>{age + ' ' + gender}</p>}
-              <p>{profile}</p>
+            <div className="bg-gray-500 w-32 h-10 rounded-lg flex items-center justify-center">
+              <Link to={'/chat/' + _id}>
+                <button className="">Chat</button>
+              </Link>
             </div>
           </div>
         );
